@@ -90,3 +90,9 @@ bool Button::released()
 {
 	return (read() == RELEASED && has_changed());
 }
+
+
+void Button::setPin(uint8_t pin)
+{
+    _pin = pin;
+}

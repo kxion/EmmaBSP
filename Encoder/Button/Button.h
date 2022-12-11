@@ -12,7 +12,8 @@
 class Button
 {
 	public:
-		Button(uint8_t pin, uint16_t debounce_ms = 100);
+		Button(uint8_t pin = 0, uint16_t debounce_ms = 100);
+        void setPin(uint8_t pin);
 		void begin();
 		bool read();
 		bool toggled();

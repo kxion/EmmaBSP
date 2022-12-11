@@ -68,11 +68,19 @@ static void EncoderTask(void* param)
  * 
  * @param enPullup 
  */
-void Encoder::Init()
+void Encoder::Init(int pinA, int pinB, int pinBTN)
 {   
+    _pinA = pinA;
+    _pinB = pinB;
+    _pinBTN = pinBTN;
+
     /* If no pin config */
-    if ((_pinA <= 0) || (_pinB <= 0))
+    if ((_pinA <= 0) || (_pinB <= 0) || (_pinBTN <= 0))
         return;
+
+    /* Inin button */
+    Btn.setPin(_pinBTN);
+    Btn.begin();
 
     /* GPIO setup */
     gpio_set_direction((gpio_num_t)_pinA, GPIO_MODE_INPUT);
@@ -102,22 +110,6 @@ void Encoder::Uninit()
 
 
 /**
- * @brief Config encoder pins
- * 
- * @param pinA 
- * @param pinB 
- */
-void Encoder::SetPin(int pinA, int pinB)
-{
-    _pinA = pinA;
-    _pinB = pinB;
-}
-
-
-
-
-
-/**
  * @brief Construct a new Encoder:: Encoder object
  * 
  */
@@ -125,6 +117,7 @@ Encoder::Encoder()
 {
     _pinA = -1;
     _pinB = -1;
+    _pinBTN = -1;
     _enPullup = true;
     _reverse = false;
     _ecTaskHandle = NULL;

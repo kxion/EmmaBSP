@@ -9,17 +9,11 @@
  * 
  */
 #pragma once
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#define EmmaDelay(ms) vTaskDelay(ms / portTICK_PERIOD_MS)
-
 #include <iostream>
 #include <string>
-using namespace std;
-
-#include <LovyanGFX_Emma.hpp>
-
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "LovyanGFX_Emma.hpp"
 
 
 /* Configs */
@@ -47,7 +41,11 @@ using namespace std;
 #define ANSI_WHITE              37
 
 
-
+/**
+ * @brief Emma BSP class 
+ * 
+ */
+using namespace std;
 class EMMA {
     private:
     
@@ -70,9 +68,7 @@ class EMMA {
         /* LovyanGFX */
         LGFX_Emma Lcd;
 
-        /**
-         * Functions
-         */
+        /* Public methods */
         void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);
         void PrintBoardInfo(bool printOnLcd = false);
         /* Cowsay */
@@ -83,3 +79,6 @@ class EMMA {
         void BuzzerTest();
 
 };
+
+/* Pack like Arduino */
+void delay(uint32_t ms);

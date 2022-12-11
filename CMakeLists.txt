@@ -6,7 +6,7 @@ set(EMMA_SRC_DIRS
     "Buzzer"
     "Buzzer/Tone"
     "Encoder"
-    "Button"
+    "Encoder/Button"
 )
 
 # Head files directories
@@ -16,7 +16,7 @@ set(EMMA_INC_DIRS
     "Buzzer"
     "Buzzer/Tone"
     "Encoder"
-    "Button"
+    "Encoder/Button"
 )
 
 # Public component requirement

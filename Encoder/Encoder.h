@@ -12,22 +12,24 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "Button/Button.h"
 
 
 class Encoder {
     private:
         int _pinA;
         int _pinB;
+        int _pinBTN;
         bool _enPullup;
         bool _reverse;
         TaskHandle_t _ecTaskHandle;
         unsigned int _ecTaskPriority;
     public:
+        Button Btn;
+
         Encoder();
         ~Encoder();
-        void SetPin(int pinA, int pinB);
-        void Init();
-        void Init(int pinA, int pinB) { SetPin(pinA, pinB); Init(); }
+        void Init(int pinA = -1, int pinB = -1, int pinBTN = -1);
         void Uninit();
         int GetDirection();
         int GetPosition();

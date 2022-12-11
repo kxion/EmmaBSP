@@ -40,7 +40,7 @@ static void tone_task(void*){
         ledcWriteTone(_channel, tone_msg.frequency);
 
         if(tone_msg.duration){
-          EmmaDelay(tone_msg.duration);
+          delay(tone_msg.duration);
         //   ledcDetachPin(tone_msg.pin);
           ledcWriteTone(_channel, 0);
         }
