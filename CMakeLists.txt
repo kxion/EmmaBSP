@@ -3,22 +3,37 @@
 # Source files directories
 set(EMMA_SRC_DIRS
     "."
+    "Buzzer"
+    "Buzzer/Tone"
+    "RGBLED"
+    "RGBLED/led_strip"
+    "Encoder"
+    "Button"
+    "Button/iot_button"
 )
 
 # Head files directories
 set(EMMA_INC_DIRS
     "."
+    "LCD"
+    "Buzzer"
+    "Buzzer/Tone"
+    "RGBLED"
+    "RGBLED/led_strip"
+    "Encoder"
+    "Button"
+    "Button/iot_button"
 )
 
 # Public component requirement
 set(EMMA_REQUIRES
-    "arduino"
-    # "LovyanGFX"
+    "LovyanGFX"
 )
 
 # Private component requirement
 set(EMMA_PRIV_REQUIRES
     "spi_flash"
+    "esp_timer"
 )
 
 # Register component
