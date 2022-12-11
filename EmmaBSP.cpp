@@ -16,8 +16,30 @@
 
 
 
+/**
+ * @brief BSP init 
+ * 
+ * @param enLcd 
+ * @param enEncoder 
+ * @param enLedRGB 
+ * @param enBuzzer 
+ */
+void EMMA::Init(bool enLcd, bool enEncoder, bool enLedRGB, bool enBuzzer)
+{
+    /* LCD init */
+    // if (enLcd)
+        // lcd.init()
+    
+    /* Print infomations */
+    PrintBoardInfo();
+
+    /* RGB LED init */
+    // if (enLedRGB)
 
 
+
+
+}
 
 
 /**
@@ -28,7 +50,7 @@
 void EMMA::PrintBoardInfo(bool printOnLcd)
 {
     /* Print Logo */
-    printf(EmmaLogo.c_str());
+    printf("%s\n", EmmaLogo.c_str());
     printf(" Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
 
     /* Print chip and flash information */
@@ -36,12 +58,12 @@ void EMMA::PrintBoardInfo(bool printOnLcd)
     uint32_t flash_size;
     esp_chip_info(&chip_info);
     if(esp_flash_get_size(NULL, &flash_size) != ESP_OK) {
-        printf("Get flash size failed");
+        printf(" Get flash size failed");
         return;
     }
-    printf(" %luMB %s flash\n", flash_size / (1024 * 1024),
+    printf(" %u MB %s flash\n", flash_size / (1024 * 1024),
            (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
-    printf(" Minimum free heap size: %ld bytes\n\n", esp_get_minimum_free_heap_size());
+    printf(" Minimum free heap size: %d bytes\n\n", esp_get_minimum_free_heap_size());
 
     /* Print infos on LCD */
     #if LCD_PRINT_INIT_INFO
@@ -77,15 +99,8 @@ string EMMA::Cowsay(string whatCowSay, int ANSIcolor)
     ret.append(whatCowSay);
     ret.append(" >\n ");
     ret.append(whatCowSay.length() + 2, '-');
+    ret.append(Cow);
 
-    /* Print cow */
-    ret.append(R"(
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-    )");
     /* Reset color */
     if (ANSIcolor != 0)
         ret.append("\033[0m\n");

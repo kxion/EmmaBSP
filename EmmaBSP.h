@@ -56,13 +56,20 @@ class EMMA {
  \ \_____\ \_\ \ \_\ \_\ \ \_\ \_\ \_\
   \/_____/\/_/  \/_/\/_/  \/_/\/_/\/_/
 )";
-
+        const string Cow = R"(
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+)";
         /**
          * @brief Public methods
          * 
          */
-        void PrintBoardInfo(bool printOnLcd = 1);
-        string Cowsay(string whatCowSay, int ANSIcolor);
+        void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);
+        void PrintBoardInfo(bool printOnLcd = true);
+        string Cowsay(string whatCowSay, int ANSIcolor = 0);
 
 };
 
