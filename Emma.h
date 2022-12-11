@@ -19,13 +19,11 @@
 using namespace std;
 
 #include <LovyanGFX_Emma.hpp>
-#include "led_strip.h"
 
 
 
 /* Configs */
-#define BSP_VERISON             "v1.0"
-#define LCD_PRINT_INIT_INFO     1
+#define BSP_VERISON             "v2.0"
 /* GPIO map */
 #define EMMA_PIN_BUZZER         46
 #define EMMA_PIN_RGB_LED        1
@@ -52,35 +50,36 @@ using namespace std;
 
 class EMMA {
     private:
-        led_strip_handle_t _RGB_LED_Handler;
+    
     public:
-        const string EmmaLogo = R"(
+        const string Logo = R"(
  ______  __    __  __    __  ______
 /\  ___\/\ "-./  \/\ "-./  \/\  __ \
 \ \  __\\ \ \-./\ \ \ \-./\ \ \  __ \
  \ \_____\ \_\ \ \_\ \_\ \ \_\ \_\ \_\
   \/_____/\/_/  \/_/\/_/  \/_/\/_/\/_/
-
 )";
-        LGFX_Emma lcd;
+        const string Cow = R"(
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+)";
+
+        /* LovyanGFX */
+        LGFX_Emma Lcd;
 
         /**
          * Functions
          */
         void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);
-        void PrintBoardInfos();
+        void PrintBoardInfo(bool printOnLcd = false);
         /* Cowsay */
-        string Cowsay(string whatCowSay, int ANSIcolor);
-        string Cowsay(string whatCowSay) { return Cowsay(whatCowSay, 0); }
+        string Cowsay(string whatCowSay, int ANSIcolor = 0);
         /* Buzzer */
         inline void StartTone(unsigned int frequency, unsigned long duration = 0);
         inline void StopTone();
         void BuzzerTest();
-        /* RGB LED */
-        void RgbLedInit(uint32_t ledNum = 1);
-        void RgbLedSet(uint32_t index, uint32_t colorRGB);
-        void RgbLedSet(int colorRGB) { RgbLedSet(0, colorRGB); };
-        inline void RgbLedUpdate();
-        void RgbLedShow(uint32_t index, int colorRGB);
-        void RgbLedShow(int colorRGB) { RgbLedShow(0, colorRGB); };
+
 };

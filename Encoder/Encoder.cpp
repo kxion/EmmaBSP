@@ -42,19 +42,19 @@ static void EncoderTask(void* param)
     bool stateA_old = 0;
 
     while (1) {
-        /* Get pin state */
-        stateA = gpio_get_level((gpio_num_t)encoderPins->pinA);
-        stateB = gpio_get_level((gpio_num_t)encoderPins->pinB);
+        // /* Get pin state */
+        // stateA = gpio_get_level((gpio_num_t)encoderPins->pinA);
+        // stateB = gpio_get_level((gpio_num_t)encoderPins->pinB);
 
-        /* If edge changed */
-        if (stateA != stateA_old) {
-            EncoderDirection = (stateA == stateB) ? 1 : -1;
-        }
-        else {
-            EncoderDirection = 0;
-        }
+        // /* If edge changed */
+        // if (stateA != stateA_old) {
+        //     EncoderDirection = (stateA == stateB) ? 1 : -1;
+        // }
+        // else {
+        //     EncoderDirection = 0;
+        // }
 
-        stateA_old = stateA;
+        // stateA_old = stateA;
 
 
         vTaskDelay(20 / portTICK_PERIOD_MS);

@@ -16,38 +16,38 @@
 
 
 
-
-
+/**
+ * @brief BSP init 
+ * 
+ * @param enLcd 
+ * @param enEncoder 
+ * @param enLedRGB 
+ * @param enBuzzer 
+ */
 void EMMA::Init(bool enLcd, bool enEncoder, bool enLedRGB, bool enBuzzer)
 {
     /* LCD init */
     if (enLcd) {
-        lcd.init();
+        Lcd.init();
     }
     
     /* Print infomations */
-    PrintBoardInfos();
+    PrintBoardInfo(true);
 
-    /* RGB LED init */
-    if (enLedRGB) {
-        RgbLedInit();
-    }
-
+    
 
 
 }
-
-
 
 
 /**
  * @brief Print board's infomations
  * 
  */
-void EMMA::PrintBoardInfos()
+void EMMA::PrintBoardInfo(bool printOnLcd)
 {
     /* Print Logo */
-    printf(EmmaLogo.c_str());
+    printf("%s\n", Logo.c_str());
     printf(" Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
 
     /* Print chip information */
@@ -63,26 +63,23 @@ void EMMA::PrintBoardInfos()
     printf(" Minimum free heap size: %ld bytes\n\n", esp_get_minimum_free_heap_size());
 
     /* Print infos on LCD */
-    #if LCD_PRINT_INIT_INFO
-    lcd.setCursor(0, 0);
-    lcd.printf(EmmaLogo.c_str());
-    lcd.printf(" Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
-    lcd.printf(" %luMB %s flash\n", flash_size / (1024 * 1024),
-           (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
-    lcd.printf(" Minimum free heap size: %ld bytes\n\n", esp_get_minimum_free_heap_size());
-    #endif
-
-    // printf(Cowsay("Emma HMI Core Boarad :)").c_str());
+    if (printOnLcd) {
+        Lcd.setCursor(0, 0);
+        Lcd.printf(Logo.c_str());
+        Lcd.printf(" Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
+        Lcd.printf(" %luMB %s flash\n", flash_size / (1024 * 1024),
+            (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
+        Lcd.printf(" Minimum free heap size: %ld bytes\n\n", esp_get_minimum_free_heap_size());
+    }
 }
-
 
 
 /**
  * @brief Listen to the cow
  * 
  * @param whatCowSay 
- * @param ANSIcolor 
- * @return string what cow is saying
+ * @param ANSIcolor e.g. ANSI_BLUE
+ * @return string that cow want to say
  */
 string EMMA::Cowsay(string whatCowSay, int ANSIcolor)
 {
@@ -99,15 +96,8 @@ string EMMA::Cowsay(string whatCowSay, int ANSIcolor)
     ret.append(whatCowSay);
     ret.append(" >\n ");
     ret.append(whatCowSay.length() + 2, '-');
+    ret.append(Cow);
 
-    /* Print cow */
-    ret.append(R"(
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-    )");
     /* Reset color */
     if (ANSIcolor != 0)
         ret.append("\033[0m\n");
