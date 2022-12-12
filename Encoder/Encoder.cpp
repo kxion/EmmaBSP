@@ -55,7 +55,7 @@ static void EncoderTask(void* param)
  * @brief Construct a new Encoder:: Encoder object
  * 
  */
-Encoder::Encoder()
+ENCODER::ENCODER()
 {
     _pinA = -1;
     _pinB = -1;
@@ -70,7 +70,7 @@ Encoder::Encoder()
  * @brief Destroy the Encoder:: Encoder object
  * 
  */
-Encoder::~Encoder()
+ENCODER::~ENCODER()
 {
     Uninit();
 }
@@ -81,7 +81,7 @@ Encoder::~Encoder()
  * 
  * @param enPullup 
  */
-void Encoder::Init(int pinA, int pinB, int pinBTN)
+void ENCODER::Init(int pinA, int pinB, int pinBTN)
 {   
     _pinA = pinA;
     _pinB = pinB;
@@ -112,7 +112,7 @@ void Encoder::Init(int pinA, int pinB, int pinBTN)
  * @brief Uinit encoder
  * 
  */
-void Encoder::Uninit()
+void ENCODER::Uninit()
 {
     vTaskDelete(_ecTaskHandle);
     gpio_reset_pin((gpio_num_t)_pinA);
@@ -126,7 +126,7 @@ void Encoder::Uninit()
  * 
  * @return int 114514:timeout
  */
-int Encoder::GetDirection()
+int ENCODER::GetDirection()
 {
     _Ret = 114514;
     if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
@@ -142,7 +142,7 @@ int Encoder::GetDirection()
  * 
  * @return int 114514:timeout
  */
-int Encoder::GetPosition()
+int ENCODER::GetPosition()
 {
     _Ret = 114514;
     if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
@@ -157,7 +157,7 @@ int Encoder::GetPosition()
  * @brief Reset encoder position to 0
  * 
  */
-void Encoder::ResetPosition()
+void ENCODER::ResetPosition()
 {
     if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
         _oldPosition = 0;
@@ -173,7 +173,7 @@ void Encoder::ResetPosition()
  * @return true 
  * @return false 
  */
-bool Encoder::Moved()
+bool ENCODER::Moved()
 {
     if (GetPosition() == _oldPosition) {
         return false;

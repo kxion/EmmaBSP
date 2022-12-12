@@ -15,7 +15,7 @@
 #include "Button/Button.h"
 
 
-class Encoder {
+class ENCODER {
     private:
         int _pinA;
         int _pinB;
@@ -27,8 +27,8 @@ class Encoder {
         /* Button */
         Button Btn;
         /* Public methods */
-        Encoder();
-        ~Encoder();
+        ENCODER();
+        ~ENCODER();
         void Init(int pinA = -1, int pinB = -1, int pinBTN = -1);
         void Uninit();
         int GetDirection();

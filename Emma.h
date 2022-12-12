@@ -13,11 +13,12 @@
 #include <string>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "LovyanGFX_Emma.hpp"
+#include "Lcd/LovyanGFX_Emma.hpp"
+#include "Encoder/Encoder.h"
 
 
 /* Configs */
-#define BSP_VERISON             "v2.0"
+#define BSP_VERISON             "v2.1"
 /* GPIO map */
 #define EMMA_PIN_BUZZER         46
 #define EMMA_PIN_RGB_LED        1
@@ -67,6 +68,8 @@ class EMMA {
 
         /* LovyanGFX */
         LGFX_Emma Lcd;
+        /* Encoder */
+        ENCODER Encoder;
 
         /* Public methods */
         void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);

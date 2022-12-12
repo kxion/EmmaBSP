@@ -34,7 +34,10 @@ void EMMA::Init(bool enLcd, bool enEncoder, bool enLedRGB, bool enBuzzer)
     /* Print infomations */
     PrintBoardInfo(true);
 
-    
+    /* Encoder init */
+    if (enEncoder) {
+        Encoder.Init(EMMA_PIN_EC_A, EMMA_PIN_EC_B, EMMA_PIN_EC_BTN);
+    }
 
 
 }
