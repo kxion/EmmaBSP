@@ -9,21 +9,19 @@
  * 
  */
 #include "Encoder.h"
+#include "freertos/semphr.h"
 #include "driver/gpio.h"
 
 
-/* Struct to pass pin config to task */
-struct EncoderPins_t
-{
-    int pinA;
-    int pinB;
-};
-static EncoderPins_t EncoderPins;
-
+/* Use "Button" to handle encoder's gpio */
+static Button _EcA;
+static Button _EcB;
+/* Semaphore for shared data */
+static SemaphoreHandle_t _SemaphoreMutex;
 /* Values of encoder */
-static int EncoderPositoin;
-static int EncoderDirection;
-
+static int _EncoderPositoin;
+static int _EncoderDirection;
+static int _Ret;
 
 
 
@@ -34,32 +32,47 @@ static int EncoderDirection;
  */
 static void EncoderTask(void* param)
 {
-    /* Get encoder pin config */
-    EncoderPins_t* encoderPins = (EncoderPins_t*)param;
-
-    bool stateA = 0;
-    bool stateB = 0;
-    bool stateA_old = 0;
-
+    _EncoderPositoin = 0;
+    _EncoderDirection = 0;
     while (1) {
-        // /* Get pin state */
-        // stateA = gpio_get_level((gpio_num_t)encoderPins->pinA);
-        // stateB = gpio_get_level((gpio_num_t)encoderPins->pinB);
-
-        // /* If edge changed */
-        // if (stateA != stateA_old) {
-        //     EncoderDirection = (stateA == stateB) ? 1 : -1;
-        // }
-        // else {
-        //     EncoderDirection = 0;
-        // }
-
-        // stateA_old = stateA;
-
-
-        vTaskDelay(20 / portTICK_PERIOD_MS);
+        xSemaphoreTake(_SemaphoreMutex, portMAX_DELAY);
+        /* If moved */
+        if (_EcA.pressed()) {
+            _EncoderDirection = (_EcB.read() ? 1 : -1);
+            _EncoderPositoin += _EncoderDirection;
+        }
+        else {
+            _EncoderDirection = 0;
+        }
+        xSemaphoreGive(_SemaphoreMutex);
+        vTaskDelay(5 / portTICK_PERIOD_MS);
     }
     vTaskDelete(NULL);
+}
+
+
+/**
+ * @brief Construct a new Encoder:: Encoder object
+ * 
+ */
+Encoder::Encoder()
+{
+    _pinA = -1;
+    _pinB = -1;
+    _pinBTN = -1;
+    _ecTaskHandle = NULL;
+    _ecTaskPriority = 1;
+    _oldPosition = 0;
+}
+
+
+/**
+ * @brief Destroy the Encoder:: Encoder object
+ * 
+ */
+Encoder::~Encoder()
+{
+    Uninit();
 }
 
 
@@ -78,22 +91,20 @@ void Encoder::Init(int pinA, int pinB, int pinBTN)
     if ((_pinA <= 0) || (_pinB <= 0) || (_pinBTN <= 0))
         return;
 
-    /* Inin button */
+    /* Init A, B by using "Button" */
+    _EcA.setPin(_pinA);
+    _EcA.setDebounce(5);
+    _EcA.begin();
+    _EcB.setPin(_pinB);
+    _EcB.setDebounce(5);
+    _EcB.begin();
+    /* Init button */
     Btn.setPin(_pinBTN);
     Btn.begin();
 
-    /* GPIO setup */
-    gpio_set_direction((gpio_num_t)_pinA, GPIO_MODE_INPUT);
-    gpio_set_direction((gpio_num_t)_pinB, GPIO_MODE_INPUT);
-    if (_enPullup) {
-        gpio_pullup_en((gpio_num_t)_pinA);
-        gpio_pullup_en((gpio_num_t)_pinB);
-    }
-
     /* Create encoder task */
-    EncoderPins.pinA = _pinA;
-    EncoderPins.pinB = _pinB;
-    xTaskCreate(EncoderTask, "Encoder", 1024, (void*)&EncoderPins, _ecTaskPriority, &_ecTaskHandle);
+    _SemaphoreMutex = xSemaphoreCreateMutex();
+    xTaskCreate(EncoderTask, "Encoder", 1024, NULL, _ecTaskPriority, &_ecTaskHandle);
 }
 
 
@@ -106,52 +117,69 @@ void Encoder::Uninit()
     vTaskDelete(_ecTaskHandle);
     gpio_reset_pin((gpio_num_t)_pinA);
     gpio_reset_pin((gpio_num_t)_pinB);
+    gpio_reset_pin((gpio_num_t)_pinBTN);
 }
 
 
 /**
- * @brief Construct a new Encoder:: Encoder object
+ * @brief Get encoder direction, mainly for internal use, high frequency call needed
  * 
- */
-Encoder::Encoder()
-{
-    _pinA = -1;
-    _pinB = -1;
-    _pinBTN = -1;
-    _enPullup = true;
-    _reverse = false;
-    _ecTaskHandle = NULL;
-    _ecTaskPriority = 1;
-}
-
-
-/**
- * @brief Destroy the Encoder:: Encoder object
- * 
- */
-Encoder::~Encoder()
-{
-    Uninit();
-}
-
-
-/**
- * @brief Get the Direction object
- * 
- * @return int 
+ * @return int 114514:timeout
  */
 int Encoder::GetDirection()
 {
-    return EncoderDirection;
+    _Ret = 114514;
+    if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
+        _Ret = _EncoderDirection;
+        xSemaphoreGive(_SemaphoreMutex);
+    }
+    return _Ret;
 }
 
 
 /**
- * @brief Get the Position object
+ * @brief Get encoder position
  * 
- * @return int 
+ * @return int 114514:timeout
  */
 int Encoder::GetPosition()
 {
-    return 0;
+    _Ret = 114514;
+    if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
+        _Ret = _EncoderPositoin;
+        xSemaphoreGive(_SemaphoreMutex);
+    }
+    return _Ret;
+}
+
+
+/**
+ * @brief Reset encoder position to 0
+ * 
+ */
+void Encoder::ResetPosition()
+{
+    if (xSemaphoreTake(_SemaphoreMutex, (TickType_t)100) == pdTRUE) {
+        _oldPosition = 0;
+        _EncoderPositoin = 0;
+        xSemaphoreGive(_SemaphoreMutex);
+    }
+}
+
+
+/**
+ * @brief Is encider moved 
+ * 
+ * @return true 
+ * @return false 
+ */
+bool Encoder::Moved()
+{
+    if (GetPosition() == _oldPosition) {
+        return false;
+    }
+    else {
+        _oldPosition = GetPosition();
+        return true;
+    }
 }

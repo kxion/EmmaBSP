@@ -96,3 +96,8 @@ void Button::setPin(uint8_t pin)
 {
     _pin = pin;
 }
+
+void Button::setDebounce(uint16_t ms)
+{
+    _delay = ms;
+}

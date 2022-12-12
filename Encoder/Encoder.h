@@ -20,22 +20,20 @@ class Encoder {
         int _pinA;
         int _pinB;
         int _pinBTN;
-        bool _enPullup;
-        bool _reverse;
         TaskHandle_t _ecTaskHandle;
         unsigned int _ecTaskPriority;
+        int _oldPosition;
     public:
+        /* Button */
         Button Btn;
-
+        /* Public methods */
         Encoder();
         ~Encoder();
         void Init(int pinA = -1, int pinB = -1, int pinBTN = -1);
         void Uninit();
         int GetDirection();
         int GetPosition();
+        void ResetPosition();
+        bool Moved();
 };
-
-
-
-
 
