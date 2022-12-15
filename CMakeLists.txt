@@ -7,6 +7,7 @@ set(EMMA_SRC_DIRS
     "Buzzer/Tone"
     "Encoder"
     "Encoder/Button"
+    "LvglPorting"
 )
 
 # Head files directories
@@ -17,11 +18,13 @@ set(EMMA_INC_DIRS
     "Buzzer/Tone"
     "Encoder"
     "Encoder/Button"
+    "LvglPorting"
 )
 
 # Public component requirement
 set(EMMA_REQUIRES
     "LovyanGFX"
+    "lvgl"
 )
 
 # Private component requirement

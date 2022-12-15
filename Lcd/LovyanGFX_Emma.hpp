@@ -1,6 +1,7 @@
 // v1.0.0 を有効にします(v0からの移行期間の特別措置です。これを書かない場合は旧v0系で動作します。)
-#define LGFX_USE_V1
+#pragma once
 
+#define LGFX_USE_V1
 #include <LovyanGFX.hpp>
 
 // ESP32でLovyanGFXを独自設定で利用する場合の設定例
