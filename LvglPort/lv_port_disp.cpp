@@ -43,7 +43,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 /**********************
  *  STATIC VARIABLES
  **********************/
-static LGFX_Emma* _lgfxEmma = nullptr;
+static LGFX_Emma* _lgfxEmma;
 
 /**********************
  *      MACROS
@@ -107,8 +107,10 @@ void lv_port_disp_init(LGFX_Emma* lgfxEmma)
 
     /* Apply buffer from PSRAM */
     static lv_disp_draw_buf_t draw_buf_dsc_3;
-    lv_color_t * buf_3_1 = (lv_color_t *)heap_caps_malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
-    lv_color_t * buf_3_2 = (lv_color_t *)heap_caps_malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
+    // lv_color_t * buf_3_1 = (lv_color_t *)heap_caps_malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
+    // lv_color_t * buf_3_2 = (lv_color_t *)heap_caps_malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t), MALLOC_CAP_SPIRAM);
+    lv_color_t * buf_3_1 = (lv_color_t *)malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t));
+    lv_color_t * buf_3_2 = (lv_color_t *)malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES * sizeof(lv_color_t));
     if ((buf_3_1 == NULL) || (buf_3_2 == NULL)) {
         ESP_LOGE("LvglPorting", "malloc from PSRAM failed");
         return;
