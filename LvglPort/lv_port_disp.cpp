@@ -43,7 +43,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 /**********************
  *  STATIC VARIABLES
  **********************/
-static LGFX_Emma* _lgfxEmma;
+static LGFX_Emma* _lgfxEmma = nullptr;
 
 /**********************
  *      MACROS
@@ -53,9 +53,9 @@ static LGFX_Emma* _lgfxEmma;
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_port_disp_init(LGFX_Emma* lgfxEmma)
+void lv_port_disp_init(LGFX_Emma* pLgfxEmma)
 {
-    _lgfxEmma = lgfxEmma;
+    _lgfxEmma = pLgfxEmma;
 
     /*-------------------------
      * Initialize your display

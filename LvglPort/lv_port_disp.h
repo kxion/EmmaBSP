@@ -37,7 +37,7 @@
  * GLOBAL PROTOTYPES
  **********************/
 /* Initialize low level display driver */
-void lv_port_disp_init(LGFX_Emma* lgfxEmma);
+void lv_port_disp_init(LGFX_Emma* pLgfxEmma);
 
 /* Enable updating the screen (the flushing process) when disp_flush() is called by LVGL
  */

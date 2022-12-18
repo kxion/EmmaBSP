@@ -29,6 +29,9 @@ void EMMA::Init(bool enLcd, bool enEncoder, bool enLedRGB, bool enBuzzer)
     /* LCD init */
     if (enLcd) {
         Lcd.init();
+        Lcd.fillScreen(TFT_BLACK);
+        Lcd.setBrightness(100);
+        // Lcd.setRotation(1);
     }
     
     /* Print infomations */
@@ -69,7 +72,7 @@ void EMMA::PrintBoardInfo(bool printOnLcd)
     if (printOnLcd) {
         Lcd.setCursor(0, 0);
         Lcd.printf(Logo.c_str());
-        Lcd.printf(" Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
+        Lcd.printf("\n Emma HMI Core Boarad :)\n BSP %s\n", BSP_VERISON);
         Lcd.printf(" %luMB %s flash\n", flash_size / (1024 * 1024),
             (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
         Lcd.printf(" Minimum free heap size: %ld bytes\n\n", esp_get_minimum_free_heap_size());
@@ -84,13 +87,13 @@ void EMMA::PrintBoardInfo(bool printOnLcd)
  * @param ANSIcolor e.g. ANSI_BLUE
  * @return string that cow want to say
  */
-string EMMA::Cowsay(string whatCowSay, int ANSIcolor)
+std::string EMMA::Cowsay(std::string whatCowSay, int ANSIcolor)
 {
-    string ret;
+    std::string ret;
 
     /* Set corlor */
     if (ANSIcolor != 0)
-        ret = "\033[0;" + to_string(ANSIcolor) + "m";
+        ret = "\033[0;" + std::to_string(ANSIcolor) + "m";
     
     /* Print dialog */
     ret.append(" ");

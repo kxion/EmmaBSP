@@ -46,19 +46,18 @@
  * @brief Emma BSP class 
  * 
  */
-using namespace std;
 class EMMA {
     private:
     
     public:
-        const string Logo = R"(
+        const std::string Logo = R"(
  ______  __    __  __    __  ______
 /\  ___\/\ "-./  \/\ "-./  \/\  __ \
 \ \  __\\ \ \-./\ \ \ \-./\ \ \  __ \
  \ \_____\ \_\ \ \_\ \_\ \ \_\ \_\ \_\
   \/_____/\/_/  \/_/\/_/  \/_/\/_/\/_/
 )";
-        const string Cow = R"(
+        const std::string Cow = R"(
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
@@ -75,7 +74,7 @@ class EMMA {
         void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);
         void PrintBoardInfo(bool printOnLcd = false);
         /* Cowsay */
-        string Cowsay(string whatCowSay, int ANSIcolor = 0);
+        std::string Cowsay(std::string whatCowSay, int ANSIcolor = 0);
         /* Buzzer */
         inline void StartTone(unsigned int frequency, unsigned long duration = 0);
         inline void StopTone();

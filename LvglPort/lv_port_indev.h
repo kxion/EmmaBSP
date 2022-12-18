@@ -5,23 +5,23 @@
  */
 
 /*Copy this file as "lv_port_indev.h" and set this value to "1" to enable content*/
-#if 0
+#if 1
 
 #ifndef LV_PORT_INDEV_TEMPL_H
 #define LV_PORT_INDEV_TEMPL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 
 /*********************
  *      INCLUDES
  *********************/
 #include "lvgl/lvgl.h"
+#include "../Encoder/Encoder.h"
 
 /*********************
  *      DEFINES
  *********************/
+#define ENCODER_REVERSE 0
 
 /**********************
  *      TYPEDEFS
@@ -30,15 +30,13 @@ extern "C" {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-void lv_port_indev_init(void);
+// void lv_port_indev_init(void);
+void lv_port_indev_init(ENCODER* pEncoder);
 
 /**********************
  *      MACROS
  **********************/
 
-#ifdef __cplusplus
-} /*extern "C"*/
-#endif
 
 #endif /*LV_PORT_INDEV_TEMPL_H*/
 
