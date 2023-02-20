@@ -29,7 +29,7 @@ void EMMA::init()
 {
     // delay(2000);
     printBspInfos();
-    printf("%s", Cowsay("Meow~", ANSI_YELLOW).c_str());
+    printf("%s", Cowsay("Meow~").c_str());
 
 
     /* int modules */

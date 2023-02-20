@@ -17,7 +17,7 @@
 
 
 /* Enable module RGB led */
-#define EMMA_MODULE_RGB_LED             1
+#define EMMA_MODULE_RGB_LED             0
 #if EMMA_MODULE_RGB_LED
     #define EMMA_RGBLED_PIN             21
     #define EMMA_RGBLED_NUM             1
@@ -27,7 +27,7 @@
 /* Enable module buzzer */
 #define EMMA_MODULE_BUZZER              1
 #if EMMA_MODULE_BUZZER
-    #define EMMA_BUZZER_PIN             0
+    #define EMMA_BUZZER_PIN             2
     #define EMMA_BUZZER_MELOD           1
     #define EMMA_BUZZER_MELODY_MSG      1
     #define EMMA_BUZZER_MELODY_MUSIC    1
