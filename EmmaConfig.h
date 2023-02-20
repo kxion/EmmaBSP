@@ -13,19 +13,21 @@
 
 /* Common configs */
 #define EMMA_BSP_VERISON                "v3.0"
-#define EMMA_PROJECT_NAME               "Bricky"
+#define EMMA_PROJECT_NAME               "Emma"
 
 
 /* Enable module RGB led */
-#define EMMA_MODULE_RGB_LED             0
+/* Require: https://github.com/FastLED/FastLED.git */
+#define EMMA_MODULE_RGB_LED             1
 #if EMMA_MODULE_RGB_LED
-    #define EMMA_RGBLED_PIN             21
-    #define EMMA_RGBLED_NUM             1
+    #define EMMA_RGBLED_PIN             15
+    #define EMMA_RGBLED_NUM             10
+    #define EMMA_RGBLED_INIT_TEST       0
 #endif
 
 
 /* Enable module buzzer */
-#define EMMA_MODULE_BUZZER              1
+#define EMMA_MODULE_BUZZER              0
 #if EMMA_MODULE_BUZZER
     #define EMMA_BUZZER_PIN             2
     #define EMMA_BUZZER_MELOD           1

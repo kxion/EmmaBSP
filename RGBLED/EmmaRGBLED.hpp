@@ -45,8 +45,9 @@ class EmmaRGBLED
             }
 
             FastLED.addLeds<SK6812, EMMA_RGBLED_PIN, GRB>(leds, EMMA_RGBLED_NUM);
+            ESP_LOGI(TAG_RGBLED, "success!");
 
-            /* Test */
+            #if EMMA_RGBLED_INIT_TEST
             FastLED.showColor(CRGB::Red);
             delay(150);
             FastLED.showColor(CRGB::Green);
@@ -54,7 +55,7 @@ class EmmaRGBLED
             FastLED.showColor(CRGB::Blue);
             delay(150);
             FastLED.clear(true);
-            ESP_LOGI(TAG_RGBLED, "success!");
+            #endif
         }
 };
 
