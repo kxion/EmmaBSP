@@ -12,7 +12,7 @@
 
 
 /* Common configs */
-#define EMMA_BSP_VERISON                "v3.0"
+#define EMMA_BSP_VERISON                "v3.2"
 #define EMMA_PROJECT_NAME               "Emma"
 
 
@@ -35,12 +35,21 @@
 #endif
 
 
-/* Enable module buzzer */
+/* Enable module Buzzer */
 #define EMMA_MODULE_BUZZER              0
 #if EMMA_MODULE_BUZZER
     #define EMMA_BUZZER_PIN             2
     #define EMMA_BUZZER_MELODY          1
     #define EMMA_BUZZER_MELODY_MSG      1
     #define EMMA_BUZZER_MELODY_MUSIC    1
+#endif
+
+
+/* Enable module Mic */
+#define EMMA_MODULE_MIC_PDM             1
+#if EMMA_MODULE_MIC_PDM
+    #define EMMA_MICPDM_CLK_PIN         0
+    #define EMMA_MICPDM_DATA_PIN        34
+    #define EMMA_MICPDM_I2S_PORT        I2S_NUM_0
 #endif
 

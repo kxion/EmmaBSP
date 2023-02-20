@@ -16,6 +16,7 @@
 #include "Button/EmmaButton.hpp"
 #include "RGBLED/EmmaRGBLED.hpp"
 #include "Buzzer/EmmaBuzzer.hpp"
+#include "MicPDM/EmmaMicPDM.hpp"
 
 
 /* ANSI colors */
