@@ -10,7 +10,7 @@
  */
 #pragma once
 #include "../EmmaConfig.h"
-#if EMMA_BUZZER_MELOD
+#if EMMA_BUZZER_MELODY
 
 #define NOTE_B0  31
 #define NOTE_C1  33

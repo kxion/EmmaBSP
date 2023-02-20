@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 
+#include "Button/EmmaButton.hpp"
 #include "RGBLED/EmmaRGBLED.hpp"
 #include "Buzzer/EmmaBuzzer.hpp"
 
@@ -52,6 +53,11 @@ class EMMA {
                 ||     ||
 )";
 
+        /* Module Button */
+        #if EMMA_MODULE_BUTTON
+        EmmaButton Button;
+        #endif
+
         /* Module RGBLED */
         #if EMMA_MODULE_RGB_LED
         EmmaRGBLED Led;
@@ -61,7 +67,6 @@ class EMMA {
         #if EMMA_MODULE_BUZZER
         EmmaBuzzer Buzzer;
         #endif
-
 
         /**
          * @brief BSP init

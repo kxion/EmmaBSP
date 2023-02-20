@@ -18,10 +18,6 @@ void EMMA::load_modules()
     #if EMMA_MODULE_RGB_LED
     Led.init();
     #endif
-
-    #if EMMA_MODULE_BUZZER
-    Buzzer.play(Melody::StartUp);
-    #endif
 }
 
 
@@ -41,7 +37,7 @@ void EMMA::printBspInfos()
 {
     /* Print Logo */
     printf("%s\n", Logo.c_str());
-    printf(" Emma-BSP %s ;)\n Author: Forairaaaaa\n", EMMA_BSP_VERISON);
+    printf(" EmmaBSP %s ;)\n Author: Forairaaaaa\n", EMMA_BSP_VERISON);
     printf(" Project: %s\n", EMMA_PROJECT_NAME);
 
     /* Print chip information */

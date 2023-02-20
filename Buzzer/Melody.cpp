@@ -9,7 +9,7 @@
  * 
  */
 #include "Melody.h"
-#if EMMA_BUZZER_MELOD
+#if EMMA_BUZZER_MELODY
 
 /**
  * @brief Tool: https://musiclab.chromeexperiments.com/Song-Maker
