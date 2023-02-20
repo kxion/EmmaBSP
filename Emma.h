@@ -1,36 +1,22 @@
 /**
  * @file Emma.h
  * @author Forairaaaaa
- * @brief Emma BSP
+ * @brief 
  * @version 0.1
- * @date 2022-12-04
+ * @date 2023-02-18
  * 
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  * 
  */
 #pragma once
+#include <Arduino.h>
 #include <iostream>
 #include <string>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "Lcd/LovyanGFX_Emma.hpp"
-#include "Encoder/Encoder.h"
+
+#include "RGBLED/EmmaRGBLED.hpp"
+#include "Buzzer/EmmaBuzzer.hpp"
 
 
-/* Configs */
-#define BSP_VERISON             "v2.1"
-/* GPIO map */
-#define EMMA_PIN_BUZZER         46
-#define EMMA_PIN_RGB_LED        1
-#define EMMA_PIN_EC_BTN         2
-#define EMMA_PIN_EC_A           18
-#define EMMA_PIN_EC_B           3
-#define EMMA_PIN_LCD_RST        17
-#define EMMA_PIN_LCD_SDA        15
-#define EMMA_PIN_LCD_SCL        13
-#define EMMA_PIN_LCD_CS         21
-#define EMMA_PIN_LCD_DC         16
-#define EMMA_PIN_LCD_BL         14
 /* ANSI colors */
 #define ANSI_BLACK              30
 #define ANSI_RED                31
@@ -43,12 +29,13 @@
 
 
 /**
- * @brief Emma BSP class 
+ * @brief Emma BSP
  * 
  */
 class EMMA {
     private:
-    
+        void load_modules();
+        
     public:
         const std::string Logo = R"(
  ______  __    __  __    __  ______
@@ -65,22 +52,40 @@ class EMMA {
                 ||     ||
 )";
 
-        /* LovyanGFX */
-        LGFX_Emma Lcd;
-        /* Encoder */
-        ENCODER Encoder;
+        /* Module RGBLED */
+        #if EMMA_MODULE_RGB_LED
+        EmmaRGBLED Led;
+        #endif
 
-        /* Public methods */
-        void Init(bool enLcd = true, bool enEncoder = true, bool enLedRGB = true, bool enBuzzer = true);
-        void PrintBoardInfo(bool printOnLcd = false);
-        /* Cowsay */
+        /* Module buzzer */
+        #if EMMA_MODULE_BUZZER
+        EmmaBuzzer Buzzer;
+        #endif
+
+
+        /**
+         * @brief BSP init
+         * 
+         */
+        void init();
+
+
+        /**
+         * @brief Print out board infos
+         * 
+         */
+        void printBspInfos();
+        
+
+        /**
+         * @brief Listen to the cow
+         * 
+         * @param whatCowSay 
+         * @param ANSIcolor e.g. ANSI_BLUE
+         * @return string that cow want to say
+         */
         std::string Cowsay(std::string whatCowSay, int ANSIcolor = 0);
-        /* Buzzer */
-        inline void StartTone(unsigned int frequency, unsigned long duration = 0);
-        inline void StopTone();
-        void BuzzerTest();
+
 
 };
 
-/* Pack like Arduino */
-void delay(uint32_t ms);
