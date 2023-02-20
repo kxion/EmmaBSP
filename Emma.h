@@ -35,8 +35,6 @@
  */
 class EMMA {
     private:
-        void load_modules();
-        
     public:
         const std::string Logo = R"(
  ______  __    __  __    __  ______
@@ -60,7 +58,7 @@ class EMMA {
 
         /* Module RGBLED */
         #if EMMA_MODULE_RGB_LED
-        EmmaRGBLED Led;
+        EmmaRGBLED RGBLed = EmmaRGBLED();
         #endif
 
         /* Module buzzer */

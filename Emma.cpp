@@ -12,15 +12,10 @@
 #include "EmmaConfig.h"
 
 
-
-void EMMA::load_modules()
-{
-    #if EMMA_MODULE_RGB_LED
-    Led.init();
-    #endif
-}
-
-
+/**
+ * @brief Add your own init steps
+ * 
+ */
 void EMMA::init()
 {
     // delay(2000);
@@ -28,8 +23,6 @@ void EMMA::init()
     printf("%s", Cowsay("Meow~").c_str());
 
 
-    /* int modules */
-    load_modules();
 }
 
 

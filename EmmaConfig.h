@@ -18,7 +18,7 @@
 
 /* Enable module Button */
 /* Add your own button in "Button/EmmaButton.hpp" */
-#define EMMA_MODULE_BUTTON              1
+#define EMMA_MODULE_BUTTON              0
 #if EMMA_MODULE_BUTTON
     #define EMMA_BTN_A_PIN              39
     #define EMMA_BTN_B_PIN              38
@@ -28,11 +28,10 @@
 
 /* Enable module RGB led */
 /* Require: https://github.com/FastLED/FastLED.git */
-#define EMMA_MODULE_RGB_LED             1
+#define EMMA_MODULE_RGB_LED             0
 #if EMMA_MODULE_RGB_LED
     #define EMMA_RGBLED_PIN             15
     #define EMMA_RGBLED_NUM             10
-    #define EMMA_RGBLED_INIT_TEST       1
 #endif
 
 

@@ -21,20 +21,10 @@
 class EmmaRGBLED
 {
     private:
-        uint8_t __led_pin;
-        uint8_t __led_num;
-        
     public:
         CRGB* leds;
 
-        EmmaRGBLED(): __led_pin(EMMA_RGBLED_PIN), __led_num(EMMA_RGBLED_NUM) {}
-        ~EmmaRGBLED() { free(leds); }
-
-        /**
-         * @brief Init RGB led with FastLed
-         * 
-         */
-        void init()
+        EmmaRGBLED()
         {
             ESP_LOGI(TAG_RGBLED, "init...");
 
@@ -46,17 +36,8 @@ class EmmaRGBLED
 
             FastLED.addLeds<SK6812, EMMA_RGBLED_PIN, GRB>(leds, EMMA_RGBLED_NUM);
             ESP_LOGI(TAG_RGBLED, "success!");
-
-            #if EMMA_RGBLED_INIT_TEST
-            FastLED.showColor(CRGB::Red);
-            delay(150);
-            FastLED.showColor(CRGB::Green);
-            delay(150);
-            FastLED.showColor(CRGB::Blue);
-            delay(150);
-            FastLED.clear(true);
-            #endif
         }
+        ~EmmaRGBLED() { free(leds); }
 };
 
 #endif
