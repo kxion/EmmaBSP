@@ -23,7 +23,7 @@ class EmmaButton {
         /* Add your button here */
         Button_Add(A, EMMA_BTN_A_PIN);
         Button_Add(B, EMMA_BTN_B_PIN);
-        Button_Add(C, EMMA_BTN_C_PIN);
+        // Button_Add(C, EMMA_BTN_C_PIN);
 
 };
 

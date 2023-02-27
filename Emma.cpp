@@ -23,6 +23,9 @@ void EMMA::init()
     printf("%s", Cowsay("Meow~").c_str());
 
 
+    #if EMMA_MODULE_DISPLAY
+    Lcd.init();
+    #endif
 }
 
 

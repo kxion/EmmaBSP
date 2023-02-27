@@ -18,20 +18,20 @@
 
 /* Enable module Button */
 /* Add your own button in "Button/EmmaButton.hpp" */
-#define EMMA_MODULE_BUTTON              0
+#define EMMA_MODULE_BUTTON              1
 #if EMMA_MODULE_BUTTON
-    #define EMMA_BTN_A_PIN              39
-    #define EMMA_BTN_B_PIN              38
-    #define EMMA_BTN_C_PIN              37
+    #define EMMA_BTN_A_PIN              9
+    #define EMMA_BTN_B_PIN              0
+    #define EMMA_BTN_C_PIN              -1
 #endif
 
 
 /* Enable module RGB led */
 /* Require: https://github.com/FastLED/FastLED.git */
-#define EMMA_MODULE_RGB_LED             0
+#define EMMA_MODULE_RGB_LED             1
 #if EMMA_MODULE_RGB_LED
-    #define EMMA_RGBLED_PIN             15
-    #define EMMA_RGBLED_NUM             10
+    #define EMMA_RGBLED_PIN             14
+    #define EMMA_RGBLED_NUM             1
 #endif
 
 
@@ -46,10 +46,20 @@
 
 
 /* Enable module Mic */
-#define EMMA_MODULE_MIC_PDM             1
+#define EMMA_MODULE_MIC_PDM             0
 #if EMMA_MODULE_MIC_PDM
     #define EMMA_MICPDM_CLK_PIN         0
     #define EMMA_MICPDM_DATA_PIN        34
     #define EMMA_MICPDM_I2S_PORT        I2S_NUM_0
+#endif
+
+
+/* Enable module Display */
+/* Using https://github.com/lovyan03/LovyanGFX as GFX lib */
+#define EMMA_MODULE_DISPLAY             1
+#if EMMA_MODULE_DISPLAY
+    /* Use auto detect if supported */
+    // #define LGFX_AUTODETECT
+    /* If not, setup your own config in Display/EmmaDisplay.hpp */
 #endif
 
