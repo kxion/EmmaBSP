@@ -63,3 +63,10 @@
     /* If not, setup your own config in Display/EmmaDisplay.hpp */
 #endif
 
+
+/* Enable module Vibrator */
+#define EMMA_MODULE_VIBRATOR            1
+#if EMMA_MODULE_VIBRATOR
+    #define EMMA_VIBRATOR_PIN           46
+#endif
+

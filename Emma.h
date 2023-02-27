@@ -18,7 +18,7 @@
 #include "Buzzer/EmmaBuzzer.hpp"
 #include "MicPDM/EmmaMicPDM.hpp"
 #include "Display/EmmaDisplay.hpp"
-
+#include "Vibrator/EmmaVibrator.hpp"
 
 
 /* ANSI colors */
@@ -74,8 +74,14 @@ class EMMA {
         EmmaMicPDM Mic = EmmaMicPDM(EMMA_MICPDM_I2S_PORT, EMMA_MICPDM_CLK_PIN, EMMA_MICPDM_DATA_PIN);
         #endif
 
+        /* Module LCD Display */
         #if EMMA_MODULE_DISPLAY
         LGFX_EmmaDisplay Lcd;
+        #endif
+
+        /* Module Vibrator */
+        #if EMMA_MODULE_VIBRATOR
+        EmmaVibrator Vibrator = EmmaVibrator(EMMA_VIBRATOR_PIN);
         #endif
 
         /**
