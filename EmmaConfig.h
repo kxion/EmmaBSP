@@ -76,12 +76,15 @@
 
 
 /* Enable module Speaker */
-/* Only for Chappie-II now */
+/* Use speaker class from M5Unified, thanks to @lovyan03 */
+/* https://github.com/m5stack/M5Unified/blob/master/src/utility/Speaker_Class.hpp */
+/* Only wraped I2S mode so far */
 #define EMMA_MODULE_SPEAKER             1
 #if EMMA_MODULE_SPEAKER
-    #define EMMA_SPEAFER_ENABLE_PIN     3
     #define EMMA_SPEAKER_DATA_PIN       17
     #define EMMA_SPEAKER_BCLK_PIN       16
     #define EMMA_SPEAKER_LRCLK_PIN      15
+    /* Pin to shut down the speaker */
+    #define EMMA_SPEAFER_ENABLE_PIN     3
 #endif
 
