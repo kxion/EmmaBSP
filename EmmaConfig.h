@@ -45,7 +45,7 @@
 #endif
 
 
-/* Enable module Mic */
+/* Enable module PDM Mic */
 #define EMMA_MODULE_MIC_PDM             0
 #if EMMA_MODULE_MIC_PDM
     #define EMMA_MICPDM_CLK_PIN         0
@@ -58,15 +58,30 @@
 /* Using https://github.com/lovyan03/LovyanGFX as GFX lib */
 #define EMMA_MODULE_DISPLAY             1
 #if EMMA_MODULE_DISPLAY
-    /* Use auto detect if supported */
-    // #define LGFX_AUTODETECT
+    /* Enable auto detect if supported */
     /* If not, setup your own config in Display/EmmaDisplay.hpp */
+    #define EMMA_LGFX_AUTODETECT        0
+    #if EMMA_LGFX_AUTODETECT
+        #define LGFX_AUTODETECT
+    #endif
 #endif
 
 
 /* Enable module Vibrator */
+/* Simple viration motor control with ledc pwm */
 #define EMMA_MODULE_VIBRATOR            1
 #if EMMA_MODULE_VIBRATOR
     #define EMMA_VIBRATOR_PIN           46
+#endif
+
+
+/* Enable module Speaker */
+/* Only for Chappie-II now */
+#define EMMA_MODULE_SPEAKER             1
+#if EMMA_MODULE_SPEAKER
+    #define EMMA_SPEAFER_ENABLE_PIN     3
+    #define EMMA_SPEAKER_DATA_PIN       17
+    #define EMMA_SPEAKER_BCLK_PIN       16
+    #define EMMA_SPEAKER_LRCLK_PIN      15
 #endif
 

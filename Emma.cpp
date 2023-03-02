@@ -25,6 +25,15 @@ void EMMA::init()
 
     #if EMMA_MODULE_DISPLAY
     Lcd.init();
+    /* Print Logo */
+    Lcd.printf("%s\n", Logo.c_str());
+    delay(100);
+    Lcd.printf(" EmmaBSP %s ;)\n Author: Forairaaaaa\n", EMMA_BSP_VERISON);
+    delay(100);
+    Lcd.printf(" Project: %s\n", EMMA_PROJECT_NAME);
+    delay(100);
+    Lcd.printf("%s", Cowsay("Meow~").c_str());
+    delay(100);
     #endif
 }
 
