@@ -25,6 +25,7 @@ class EmmaSpeaker : public m5::Speaker_Class {
             cfg.pin_data_out = EMMA_SPEAKER_DATA_PIN;
             cfg.pin_bck = EMMA_SPEAKER_BCLK_PIN;
             cfg.pin_ws = EMMA_SPEAKER_LRCLK_PIN;
+            cfg.i2s_port = EMMA_SPEAKER_I2S_PORT;
             config(cfg);
             begin();
 

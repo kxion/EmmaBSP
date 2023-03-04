@@ -84,6 +84,7 @@
     #define EMMA_SPEAKER_DATA_PIN       17
     #define EMMA_SPEAKER_BCLK_PIN       16
     #define EMMA_SPEAKER_LRCLK_PIN      15
+    #define EMMA_SPEAKER_I2S_PORT       I2S_NUM_1
     /* Pin to shut down the speaker */
     #define EMMA_SPEAKER_ENABLE_PIN     3
 #endif
