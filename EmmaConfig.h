@@ -47,11 +47,14 @@
 
 
 /* Enable module PDM Mic */
+/* Use speaker class from M5Unified, thanks to @lovyan03 */
+/* https://github.com/m5stack/M5Unified/blob/master/src/utility/Mic_Class.hpp */
 #define EMMA_MODULE_MIC_PDM             1
 #if EMMA_MODULE_MIC_PDM
-    #define EMMA_MICPDM_CLK_PIN         0
-    #define EMMA_MICPDM_DATA_PIN        34
+    #define EMMA_MICPDM_CLK_PIN         6
+    #define EMMA_MICPDM_DATA_PIN        7
     #define EMMA_MICPDM_I2S_PORT        I2S_NUM_0
+    /* More configs in Mic/EmmaMicPDM.hpp */
 #endif
 
 
@@ -88,5 +91,6 @@
     #define EMMA_SPEAKER_I2S_PORT       I2S_NUM_1
     /* Pin to shut down the speaker */
     #define EMMA_SPEAKER_ENABLE_PIN     3
+    /* More configs in Speaker/EmmaSpeaker.hpp */
 #endif
 

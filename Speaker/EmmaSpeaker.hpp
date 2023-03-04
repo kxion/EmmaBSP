@@ -21,7 +21,7 @@ class EmmaSpeaker : public m5::Speaker_Class {
         EmmaSpeaker()
         {
             /* Setup pins */
-            m5::speaker_config_t cfg = config();
+            auto cfg = config();
             cfg.pin_data_out = EMMA_SPEAKER_DATA_PIN;
             cfg.pin_bck = EMMA_SPEAKER_BCLK_PIN;
             cfg.pin_ws = EMMA_SPEAKER_LRCLK_PIN;
@@ -31,6 +31,7 @@ class EmmaSpeaker : public m5::Speaker_Class {
 
             enable();
         }
+        ~EmmaSpeaker() { end(); }
         
         /* For hardware enable pin if exist */
         inline void enable() { setCtrlPin(1); }
