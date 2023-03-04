@@ -19,6 +19,7 @@
 #include "MicPDM/EmmaMicPDM.hpp"
 #include "Display/EmmaDisplay.hpp"
 #include "Vibrator/EmmaVibrator.hpp"
+#include "Speaker/EmmaSpeaker.hpp"
 
 
 /* ANSI colors */
@@ -82,6 +83,11 @@ class EMMA {
         /* Module Vibrator */
         #if EMMA_MODULE_VIBRATOR
         EmmaVibrator Vibrator = EmmaVibrator(EMMA_VIBRATOR_PIN);
+        #endif
+
+        /* Module Speaker */
+        #if EMMA_MODULE_SPEAKER
+        EmmaSpeaker Speaker;
         #endif
 
         /**
