@@ -13,17 +13,24 @@
 #include "Button/Button.h"
 #if EMMA_MODULE_BUTTON
 
+/* Add your button with this */
 #define Button_Add(name, pin) __Button name = __Button(pin)
 
-/* Wrap of button */
 class EmmaButton {
     private:
     public:
     
-        /* Add your button here */
+        #if EMMA_BTN_A_PIN >= 0
         Button_Add(A, EMMA_BTN_A_PIN);
+        #endif
+
+        #if EMMA_BTN_B_PIN >= 0
         Button_Add(B, EMMA_BTN_B_PIN);
-        // Button_Add(C, EMMA_BTN_C_PIN);
+        #endif
+
+        #if EMMA_BTN_C_PIN >= 0
+        Button_Add(C, EMMA_BTN_C_PIN);
+        #endif
 
 };
 

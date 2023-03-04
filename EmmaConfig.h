@@ -17,12 +17,13 @@
 
 
 /* Enable module Button */
-/* Add your own button in "Button/EmmaButton.hpp" */
 #define EMMA_MODULE_BUTTON              1
 #if EMMA_MODULE_BUTTON
+    /* Set pin -1 to disable */
     #define EMMA_BTN_A_PIN              9
     #define EMMA_BTN_B_PIN              0
     #define EMMA_BTN_C_PIN              -1
+    /* Add more button in "Button/EmmaButton.hpp" */
 #endif
 
 
@@ -46,7 +47,7 @@
 
 
 /* Enable module PDM Mic */
-#define EMMA_MODULE_MIC_PDM             0
+#define EMMA_MODULE_MIC_PDM             1
 #if EMMA_MODULE_MIC_PDM
     #define EMMA_MICPDM_CLK_PIN         0
     #define EMMA_MICPDM_DATA_PIN        34

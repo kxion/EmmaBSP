@@ -72,7 +72,7 @@ class EMMA {
 
         /* Module PDM mic */
         #if EMMA_MODULE_MIC_PDM
-        EmmaMicPDM Mic = EmmaMicPDM(EMMA_MICPDM_I2S_PORT, EMMA_MICPDM_CLK_PIN, EMMA_MICPDM_DATA_PIN);
+        EmmaMicPDM Mic;
         #endif
 
         /* Module LCD Display */
