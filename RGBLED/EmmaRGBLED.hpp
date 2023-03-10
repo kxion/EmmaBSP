@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "../EmmaConfig.h"
+#include "../../EmmaConfig.h"
 #if EMMA_MODULE_RGB_LED
 #include <FastLED.h>
 #include "esp32-hal-log.h"

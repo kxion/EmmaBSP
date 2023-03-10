@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "../EmmaConfig.h"
+#include "../../EmmaConfig.h"
 #if EMMA_MODULE_SPEAKER
 #include "Speaker/Speaker_Class.hpp"
 #include <driver/gpio.h>

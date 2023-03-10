@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "../EmmaConfig.h"
+#include "../../EmmaConfig.h"
 #if EMMA_MODULE_MIC_PDM
 #include "Mic/Mic_Class.hpp"
 

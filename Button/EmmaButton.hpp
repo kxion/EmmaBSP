@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "../EmmaConfig.h"
+#include "../../EmmaConfig.h"
 #include "Button/Button.h"
 #if EMMA_MODULE_BUTTON
 

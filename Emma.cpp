@@ -9,7 +9,7 @@
  * 
  */
 #include "Emma.h"
-#include "EmmaConfig.h"
+#include "../EmmaConfig.h"
 
 
 /**

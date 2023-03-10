@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "../EmmaConfig.h"
+#include "../../EmmaConfig.h"
 #if EMMA_MODULE_BUZZER
 #include <Arduino.h>
 #include "Melody.h"
